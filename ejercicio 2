@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+void Leer(int v[], int n);
+void Mostrar (int v[], int n);
+float obtenerMinimo (int v[], int n);
+int main () {
+    int n=0;
+    while(n<=0||n>100) {
+        cout<< "Ingrese la cant. de datos";
+        cin>> n ;
+            }
+    int vector [100] ;
+    Leer (vector,n );
+    Mostrar (vector,n);
+    float Minimo=obtenerMinimo (vector, n);
+    cout<<"\n el valor del vector n:"<<Minimo<< endl;
+    return 0;
+}
+
+void Leer (int v[], int n){
+    for(int i=0;i<n;i++){
+        cout<<"ingrese el valor de i["<< i+1<<"]";
+        cin>> v[i];
+    }
+}
+void Mostrar (int v[], int n){
+    for (int i=0;i<n;i++ ){
+        cout<<v[i]<<" ";
+    } cout<<endl;
+}
+float obtenerMinimo (int v[],int n){ float Minimo=v[0];
+    
+    for (int i=1;i<n;i++){
+        if (v[i]<Minimo){
+            Minimo=v[i];
+        }
+    } return Minimo;
+}
+    
