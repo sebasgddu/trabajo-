@@ -1,0 +1,62 @@
+#include <iostream>
+
+using namespace std;
+
+void leerVector(float v[], int tam, char nombre);
+void concatenarVectores(const float A[], int n, const float B[], int m, float C[]);
+void mostrarVector(const float v[], int tam, const string &nombre);
+
+int main() {
+    int n, m;
+
+    do {
+        cout << "Ingrese la cantidad de elementos para el Vector A (n > 0): ";
+        cin >> n;
+    } while (n <= 0);
+
+    do {
+        cout << "Ingrese la cantidad de elementos para el Vector B (m > 0): ";
+        cin >> m;
+    } while (m <= 0);
+
+    float A[100], B[100], C[200];
+
+    cout << "\n--- Datos del Vector A ---" << endl;
+    leerVector(A, n, 'A');
+
+    cout << "\n--- Datos del Vector B ---" << endl;
+    leerVector(B, m, 'B');
+
+    concatenarVectores(A, n, B, m, C);
+
+    cout << endl;
+    mostrarVector(A, n, "Vector A");
+    mostrarVector(B, m, "Vector B");
+    mostrarVector(C, n + m, "Vector C (Concatenado)");
+
+    return 0;
+}
+
+void leerVector(float v[], int tam, char nombre) {
+    for (int i = 0; i < tam; i++) {
+        cout << nombre << "[" << i << "]: ";
+        cin >> v[i];
+    }
+}
+
+void concatenarVectores(const float A[], int n, const float B[], int m, float C[]) {
+    for (int i = 0; i < n; i++) {
+        C[i] = A[i];
+    }
+    for (int j = 0; j < m; j++) {
+        C[n + j] = B[j];
+    }
+}
+
+void mostrarVector(const float v[], int tam, const string &nombre) {
+    cout << nombre << ": ";
+    for (int i = 0; i < tam; i++) {
+        cout << v[i] << " ";
+    }
+    cout << endl;
+}
