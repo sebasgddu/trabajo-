@@ -1,0 +1,60 @@
+#include <iostream>
+
+using namespace std;
+
+void leerVector(int A[], int n);
+bool existeElemento(const int B[], int tam, int valor);
+int eliminarDuplicados(const int A[], int n, int B[]);
+void mostrarResultados(const int B[], int tamB);
+
+int main() {
+    int n;
+
+    do {
+        cout << "Ingrese la cantidad de elementos (n > 0): ";
+        cin >> n;
+    } while (n <= 0);
+
+    int A[100], B[100];
+
+    leerVector(A, n);
+    int tamB = eliminarDuplicados(A, n, B);
+    mostrarResultados(B, tamB);
+
+    return 0;
+}
+
+void leerVector(int A[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "A[" << i << "]: ";
+        cin >> A[i];
+    }
+}
+
+bool existeElemento(const int B[], int tam, int valor) {
+    for (int i = 0; i < tam; i++) {
+        if (B[i] == valor) {
+            return true;
+        }
+    }
+    return false;
+}
+
+int eliminarDuplicados(const int A[], int n, int B[]) {
+    int k = 0;
+    for (int i = 0; i < n; i++) {
+        if (!existeElemento(B, k, A[i])) {
+            B[k] = A[i];
+            k++;
+        }
+    }
+    return k;
+}
+
+void mostrarResultados(const int B[], int tamB) {
+    cout << "\nVector B (sin duplicados): ";
+    for (int i = 0; i < tamB; i++) {
+        cout << B[i] << " ";
+    }
+    cout << "\nCantidad de elementos validos: " << tamB << endl;
+}
