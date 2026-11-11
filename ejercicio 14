@@ -1,0 +1,51 @@
+#include <iostream>
+
+using namespace std;
+
+void leerVector(float v[], int n);
+void ordenarBurbuja(float v[], int n);
+void mostrarVector(const float v[], int n, const string &mensaje);
+
+int main() {
+    int n;
+    do {
+        cout << "Ingrese la cantidad de elementos (n > 0): ";
+        cin >> n;
+    } while (n <= 0);
+
+    float vector[100];
+    leerVector(vector, n);
+
+    mostrarVector(vector, n, "Vector original: ");
+    ordenarBurbuja(vector, n);
+    mostrarVector(vector, n, "Vector ordenado (ascendente): ");
+
+    return 0;
+}
+
+void leerVector(float v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "Elemento [" << i << "]: ";
+        cin >> v[i];
+    }
+}
+
+void ordenarBurbuja(float v[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+            if (v[j] > v[j + 1]) {
+                float temp = v[j];
+                v[j] = v[j + 1];
+                v[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void mostrarVector(const float v[], int n, const string &mensaje) {
+    cout << mensaje;
+    for (int i = 0; i < n; i++) {
+        cout << v[i] << " ";
+    }
+    cout << endl;
+}
