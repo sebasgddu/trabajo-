@@ -1,0 +1,63 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void leerEstudiantes(string nombres[], float notas[], int n);
+void ordenarPorNotaDescendente(string nombres[], float notas[], int n);
+void mostrarTresMejores(const string nombres[], const float notas[], int n);
+
+int main() {
+    int n;
+    do {
+        cout << "Ingrese la cantidad de estudiantes (n >= 3): ";
+        cin >> n;
+    } while (n < 3);
+
+    string nombres[100];
+    float notas[100];
+
+    leerEstudiantes(nombres, notas, n);
+    ordenarPorNotaDescendente(nombres, notas, n);
+    mostrarTresMejores(nombres, notas, n);
+
+    return 0;
+}
+
+void leerEstudiantes(string nombres[], float notas[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "\nEstudiante " << i + 1 << ":" << endl;
+        cout << "Nombre: ";
+        cin.ignore();
+        getline(cin, nombres[i]);
+
+        do {
+            cout << "Nota (0 a 100): ";
+            cin >> notas[i];
+        } while (notas[i] < 0 || notas[i] > 100);
+    }
+}
+
+void ordenarPorNotaDescendente(string nombres[], float notas[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+            if (notas[j] < notas[j + 1]) {
+                // Intercambio de notas
+                float tempNota = notas[j];
+                notas[j] = notas[j + 1];
+                notas[j + 1] = tempNota;
+
+                // Intercambio paralelo de nombres
+                string tempNombre = nombres[j];
+                nombres[j] = nombres[j + 1];
+                nombres[j + 1] = tempNombre;
+            }
+        }
+    }
+}
+
+void mostrarTresMejores(const string nombres[], const float notas[], int n) {
+    cout << "\n=== TRES MEJORES NOTAS ===" << endl;
+    for (int i = 0; i < 3 && i < n; i++) {
+        cout << i + 1 << ". " << nombres[i] << " - Nota: " << notas[i] << endl;
+    }
