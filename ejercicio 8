@@ -1,0 +1,53 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+void leerVector(float v[], int n);
+float encontrarMayorDiferencia(const float A[], int n, float &elem1, float &elem2);
+void mostrarResultado(float difMax, float elem1, float elem2);
+
+int main() {
+    int n;
+    do {
+        cout << "Ingrese la cantidad de elementos (n >= 2): ";
+        cin >> n;
+    } while (n < 2);
+
+    float A[100];
+    float elem1, elem2;
+
+    leerVector(A, n);
+    float difMax = encontrarMayorDiferencia(A, n, elem1, elem2);
+    mostrarResultado(difMax, elem1, elem2);
+
+    return 0;
+}
+
+void leerVector(float v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "A[" << i << "]: ";
+        cin >> v[i];
+    }
+}
+
+float encontrarMayorDiferencia(const float A[], int n, float &elem1, float &elem2) {
+    float maxDif = abs(A[1] - A[0]);
+    elem1 = A[0];
+    elem2 = A[1];
+
+    for (int i = 1; i < n - 1; i++) {
+        float difActual = abs(A[i + 1] - A[i]);
+        if (difActual > maxDif) {
+            maxDif = difActual;
+            elem1 = A[i];
+            elem2 = A[i + 1];
+        }
+    }
+    return maxDif;
+}
+
+void mostrarResultado(float difMax, float elem1, float elem2) {
+    cout << "\nMayor diferencia absoluta: " << difMax << endl;
+    cout << "Producida por los elementos consecutivos: " << elem1 << " y " << elem2 << endl;
+}
