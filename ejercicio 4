@@ -1,0 +1,47 @@
+#include <iostream>
+
+using namespace std;
+
+void leer(float A[], int n);
+void invertirVector(const float A[], float B[], int n);
+void mostrar(const float A[], const float B[], int n);
+
+int main() {
+    int n;
+    do {
+        cout << "Ingrese la cantidad de elementos (n > 0): ";
+        cin >> n;
+    } while (n <= 0);
+
+    float A[100], B[100];
+    leer(A, n);
+    invertirVector(A, B, n);
+    mostrar(A, B, n);
+
+    return 0;
+}
+
+void leer(float A[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "A[" << i << "]: ";
+        cin >> A[i];
+    }
+}
+
+void invertirVector(const float A[], float B[], int n) {
+    for (int i = 0; i < n; i++) {
+        B[i] = A[n - 1 - i];
+    }
+}
+
+void mostrar(const float A[], const float B[], int n) {
+    cout << "\nVector A (Original): ";
+    for (int i = 0; i < n; i++) {
+        cout << A[i] << " ";
+    }
+    cout << "\nVector B (Invertido): ";
+    for (int i = 0; i < n; i++) {
+        cout << B[i] << " ";
+    }
+    cout << endl;
+}
