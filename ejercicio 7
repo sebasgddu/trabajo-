@@ -1,0 +1,61 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void cargarNumerosEnLetras(string letras[]);
+int leerNumero();
+string convertirALetras(const string letras[], int num);
+void mostrarResultado(int num, const string &texto);
+
+int main() {
+    string letras[21];
+    cargarNumerosEnLetras(letras);
+
+    int numero = leerNumero();
+    string texto = convertirALetras(letras, numero);
+    mostrarResultado(numero, texto);
+
+    return 0;
+}
+
+void cargarNumerosEnLetras(string letras[]) {
+    letras[0] = "CERO";
+    letras[1] = "UNO";
+    letras[2] = "DOS";
+    letras[3] = "TRES";
+    letras[4] = "CUATRO";
+    letras[5] = "CINCO";
+    letras[6] = "SEIS";
+    letras[7] = "SIETE";
+    letras[8] = "OCHO";
+    letras[9] = "NUEVE";
+    letras[10] = "DIEZ";
+    letras[11] = "ONCE";
+    letras[12] = "DOCE";
+    letras[13] = "TRECE";
+    letras[14] = "CATORCE";
+    letras[15] = "QUINCE";
+    letras[16] = "DIECISEIS";
+    letras[17] = "DIECISIETE";
+    letras[18] = "DIECIOCHO";
+    letras[19] = "DIECINUEVE";
+    letras[20] = "VEINTE";
+}
+
+int leerNumero() {
+    int num;
+    do {
+        cout << "Ingrese un numero entero entre 0 y 20: ";
+        cin >> num;
+    } while (num < 0 || num > 20);
+    return num;
+}
+
+string convertirALetras(const string letras[], int num) {
+    return letras[num];
+}
+
+void mostrarResultado(int num, const string &texto) {
+    cout << num << " -> " << texto << endl;
+}
