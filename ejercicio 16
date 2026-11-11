@@ -1,0 +1,143 @@
+// Ejercicio 16: Menú de gestión de alumnos
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+const int CAPACIDAD_MAX = 100;
+
+void registrarAlumno(string nombres[], float notas[], int &n);
+void listarAlumnos(const string nombres[], const float notas[], int n);
+void ordenarPorNombre(string nombres[], float notas[], int n);
+void mostrarNotasAltas(const string nombres[], const float notas[], int n);
+float calcularPromedio(const float notas[], int n);
+
+int main() {
+    string nombres[CAPACIDAD_MAX];
+    float notas[CAPACIDAD_MAX];
+    int n = 0;
+    int opcion;
+
+    do {
+        cout << "\n=== MENU DE GESTION DE ALUMNOS ===" << endl;
+        cout << "1. Registrar alumno y nota" << endl;
+        cout << "2. Listar alumnos" << endl;
+        cout << "3. Ordenar alfabeticamente por nombre" << endl;
+        cout << "4. Mostrar alumno(s) con la nota mas alta" << endl;
+        cout << "5. Calcular el promedio de notas" << endl;
+        cout << "6. Salir" << endl;
+        cout << "Ingrese una opcion: ";
+        cin >> opcion;
+
+        switch (opcion) {
+            case 1:
+                registrarAlumno(nombres, notas, n);
+                break;
+            case 2:
+                listarAlumnos(nombres, notas, n);
+                break;
+            case 3:
+                ordenarPorNombre(nombres, notas, n);
+                break;
+            case 4:
+                mostrarNotasAltas(nombres, notas, n);
+                break;
+            case 5:
+                if (n == 0) {
+                    cout << "\nNo hay alumnos registrados." << endl;
+                } else {
+                    cout << "\nEl promedio general de notas es: " << calcularPromedio(notas, n) << endl;
+                }
+                break;
+            case 6:
+                cout << "\nSaliendo del programa..." << endl;
+                break;
+            default:
+                cout << "\nOpcion invalida. Intente de nuevo." << endl;
+        }
+    } while (opcion != 6);
+
+    return 0;
+}
+
+void registrarAlumno(string nombres[], float notas[], int &n) {
+    if (n >= CAPACIDAD_MAX) {
+        cout << "\nError: Capacidad maxima del arreglo alcanzada." << endl;
+        return;
+    }
+
+    cout << "\nIngrese el nombre del alumno: ";
+    cin.ignore();
+    getline(cin, nombres[n]);
+
+    do {
+        cout << "Ingrese la nota (0 a 100): ";
+        cin >> notas[n];
+    } while (notas[n] < 0 || notas[n] > 100);
+
+    n++;
+    cout << "Alumno registrado exitosamente." << endl;
+}
+
+void listarAlumnos(const string nombres[], const float notas[], int n) {
+    if (n == 0) {
+        cout << "\nNo hay alumnos registrados." << endl;
+        return;
+    }
+
+    cout << "\n=== LISTA DE ALUMNOS ===" << endl;
+    for (int i = 0; i < n; i++) {
+        cout << i + 1 << ". " << nombres[i] << " - Nota: " << notas[i] << endl;
+    }
+}
+
+void ordenarPorNombre(string nombres[], float notas[], int n) {
+    if (n == 0) {
+        cout << "\nNo hay alumnos registrados." << endl;
+        return;
+    }
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+            if (nombres[j] > nombres[j + 1]) {
+                string tempNombre = nombres[j];
+                nombres[j] = nombres[j + 1];
+                nombres[j + 1] = tempNombre;
+
+                float tempNota = notas[j];
+                notas[j] = notas[j + 1];
+                notas[j + 1] = tempNota;
+            }
+        }
+    }
+    cout << "\nLista ordenada alfabeticamente por nombre." << endl;
+}
+
+void mostrarNotasAltas(const string nombres[], const float notas[], int n) {
+    if (n == 0) {
+        cout << "\nNo hay alumnos registrados." << endl;
+        return;
+    }
+
+    float maxNota = notas[0];
+    for (int i = 1; i < n; i++) {
+        if (notas[i] > maxNota) {
+            maxNota = notas[i];
+        }
+    }
+
+    cout << "\n=== ALUMNO(S) CON LA NOTA MAS ALTA (" << maxNota << ") ===" << endl;
+    for (int i = 0; i < n; i++) {
+        if (notas[i] == maxNota) {
+            cout << "- " << nombres[i] << endl;
+        }
+    }
+}
+
+float calcularPromedio(const float notas[], int n) {
+    float suma = 0;
+    for (int i = 0; i < n; i++) {
+        suma += notas[i];
+    }
+    return suma / n;
+}
