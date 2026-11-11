@@ -1,0 +1,47 @@
+#include <iostream>
+
+using namespace std;
+
+void leerVector(int A[], int n);
+void invertirEnMismoVector(int A[], int n);
+void mostrarVector(const int A[], int n, const string &mensaje);
+
+int main() {
+    int n;
+    do {
+        cout << "Ingrese la cantidad de elementos (n > 0): ";
+        cin >> n;
+    } while (n <= 0);
+
+    int A[100];
+    leerVector(A, n);
+
+    mostrarVector(A, n, "Vector antes de invertir: ");
+    invertirEnMismoVector(A, n);
+    mostrarVector(A, n, "Vector despues de invertir: ");
+
+    return 0;
+}
+
+void leerVector(int A[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "A[" << i << "]: ";
+        cin >> A[i];
+    }
+}
+
+void invertirEnMismoVector(int A[], int n) {
+    for (int i = 0; i < n / 2; i++) {
+        int temp = A[i];
+        A[i] = A[n - 1 - i];
+        A[n - 1 - i] = temp;
+    }
+}
+
+void mostrarVector(const int A[], int n, const string &mensaje) {
+    cout << mensaje;
+    for (int i = 0; i < n; i++) {
+        cout << A[i] << " ";
+    }
+    cout << endl;
+}
